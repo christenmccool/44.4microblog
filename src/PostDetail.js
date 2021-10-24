@@ -13,14 +13,18 @@ const PostDetail = ({editPost, removePost}) => {
   const posts = useContext(PostContext);
   const {id} = useParams();
 
-  const post = posts.find(post => post.id === +id);
+  console.log(posts);
+  console.log(id);
+
+
+  const post = posts.find(post => post.id === id);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);
   }
 
   const handleTrashClick = () => {
-    removePost(+id);
+    removePost(id);
   }
 
   if (!post) {
