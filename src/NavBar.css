@@ -1,0 +1,21 @@
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  background-color: grey;
+  padding: 15px 10px;
+}
+
+.NavBar-right {
+  display: flex;
+  gap: 15px;
+}
+
+.NavBar a {
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+}
+
+.NavBar a.active {
+  font-weight: bold;
+}

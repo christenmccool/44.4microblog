@@ -1,0 +1,10 @@
+.Title {
+  border: 1px solid lightgrey;
+  width: 45%;
+}
+
+.Title a {
+  text-decoration: none;
+  margin: 0;
+}
+

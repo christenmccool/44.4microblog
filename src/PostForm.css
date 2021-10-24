@@ -1,0 +1,46 @@
+.PostForm {
+  display: flex;
+  flex-direction: column;
+  margin: 0 20px;
+  text-align: left;
+}
+
+.PostForm label {
+  display: block;
+  font-size: 20px;
+  margin: 20px 0 5px 0;
+}
+
+.PostForm input, .PostForm textarea{
+  display: block;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 20px;
+  width: 100%;
+}
+
+
+.PostForm-btn-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.PostForm button {
+  padding: 7px 10px 5px 10px;
+  font-size: 20px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#PostForm-submit-btn {
+  background-color: blue;
+}
+
+#PostForm-cancel-btn {
+  background-color: darkgrey;
+}

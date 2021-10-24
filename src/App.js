@@ -1,24 +1,47 @@
-import logo from './logo.svg';
 import './App.css';
+import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
+import PostContext from './PostContext';
+import NavBar from './NavBar';
+import Routes from './Routes';
+import { v4 as uuid } from 'uuid';
 
-function App() {
+const App = () => {
+  const initalState = [
+    {id: 1, title: "Blog Post 1", description: "This is my first blog post", body: "blah blah blah"},    
+    {id: 2, title: "Blog Post 2", description: "This is my second blog post", body: "blah blah blah blah blah blah blah blah blah"},
+    {id: 3, title: "Blog Post 3", description: "This is my third blog post", body: "blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah"}
+  ]
+
+  const [posts, setPosts] = useState(initalState);
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push('/');
+  }, [posts])
+
+  const addPost = (post) => {
+    setPosts([...posts, {...post, id: uuid()}]);
+  }
+
+  const editPost = (id, edPost) => {
+    setPosts(posts.map(post => {
+      if (post.id === id) return edPost;
+      return post;
+    }))
+  }
+
+  const removePost = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <PostContext.Provider value={posts}>
+      <div className="App">
+        <NavBar />
+        <Routes addPost={addPost} editPost={editPost} removePost={removePost} />
+      </div>
+    </PostContext.Provider>
   );
 }
 

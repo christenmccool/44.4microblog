@@ -1,0 +1,27 @@
+.PostDetail {
+  text-align: left;
+  margin: 20px;
+}
+
+.PostDetail-heading {
+  margin: 20px 0 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.PostDetail-icons-div {
+  font-size: 25px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.PostDetail h1 {
+  margin: 0 0 10px 0;
+}
+
+.PostDetail h2 {
+  margin: 0;
+  font-weight: normal;
+}
