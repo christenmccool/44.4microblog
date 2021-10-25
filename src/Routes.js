@@ -4,7 +4,7 @@ import Home from './Home';
 import PostForm from './PostForm';
 import PostDetail from './PostDetail';
 
-const Routes = ({ addPost, editPost, removePost }) => {
+const Routes = ({ addPost, editPost, removePost, addComment, removeComment }) => {
   return (
     <Switch>
       <Route exact path="/">
@@ -14,7 +14,7 @@ const Routes = ({ addPost, editPost, removePost }) => {
         <PostForm addPost={addPost} />
       </Route>
       <Route exact path="/posts/:id">
-        <PostDetail editPost={editPost} removePost={removePost} />
+        <PostDetail editPost={editPost} removePost={removePost} addComment={addComment} removeComment={removeComment}/>
       </Route>
       <Redirect to="/" />
     </Switch>

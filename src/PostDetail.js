@@ -4,18 +4,15 @@ import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import PostForm from './PostForm';
+import CommentList from './CommentList';
 import './PostDetail.css';
 
 
-const PostDetail = ({editPost, removePost}) => {
+const PostDetail = ({editPost, removePost, addComment, removeComment}) => {
   const [showForm, setShowForm] = useState(false);
 
   const posts = useContext(PostContext);
   const {id} = useParams();
-
-  console.log(posts);
-  console.log(id);
-
 
   const post = posts.find(post => post.id === id);
 
@@ -52,6 +49,7 @@ const PostDetail = ({editPost, removePost}) => {
       </div>
       <h2>{post.description}</h2>
       <p>{post.body}</p>
+      <CommentList postId={post.id} comments={post.comments} addComment={addComment} removeComment={removeComment} />
     </div>
   )
 }
