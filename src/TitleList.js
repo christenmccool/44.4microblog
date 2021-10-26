@@ -1,22 +1,20 @@
 import React, {useContext} from 'react';
 import Title from './Title.js';
-import PostContext from './PostContext';
-
-
+import {useSelector} from 'react-redux';
 import './TitleList.css';
 
 
 const TitleList = () => {
-  const posts = useContext(PostContext);
+  const posts = useSelector(state => state.posts);
   
   return (
     <div className="TitleList">
-      {posts.map(post => 
+      {Object.keys(posts).map(key => 
         <Title 
-          key={post.id} 
-          id={post.id} 
-          title={post.title} 
-          description={post.description} 
+          key={key} 
+          id={key} 
+          title={posts[key].title} 
+          description={posts[key].description} 
         />
       )}
     </div>
