@@ -21,7 +21,27 @@
   margin: 0 0 10px 0;
 }
 
+.PostDetail-subheading {
+  font-size: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px ;
+  background-color: #F5F5F5;
+}
+
 .PostDetail h2 {
   margin: 0;
+  font-size: 20px;
   font-weight: normal;
+}
+
+.PostDetail-thumbsup {
+  color: green;
+  margin: 0 5px 0 20px;
+}
+
+.PostDetail-thumbsdown {
+  color: red;
+  margin: 0 5px;
 }

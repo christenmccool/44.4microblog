@@ -1,4 +1,4 @@
-import {LOAD_TITLES, LOAD_POST, ADD_POST, DELETE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT} from './actionTypes';
+import {LOAD_TITLES, LOAD_POST, ADD_POST, DELETE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT, VOTE_POST} from './actionTypes';
 import axios from 'axios';
 
 function getTitlesFromAPI() {
@@ -41,7 +41,7 @@ function addPost(id, post) {
 
 function deleteFromAPI(id) {
   return async function(dispatch) {
-    let res = await axios.delete(`http://localhost:5000/api/posts/${id}`);
+    await axios.delete(`http://localhost:5000/api/posts/${id}`);
     dispatch(deletePost(id));
   };
 }
@@ -88,10 +88,11 @@ function addComment(postId, commentId, text) {
 
 function deleteCommentFromAPI(postId, commentId) {
   return async function(dispatch) {
-    let res = await axios.delete(`http://localhost:5000/api/posts/${postId}/comments/${commentId}`);
+    await axios.delete(`http://localhost:5000/api/posts/${postId}/comments/${commentId}`);
     dispatch(deleteComment(postId, commentId));
   };
 }
+
 
 function deleteComment(postId, commentId) {
   return {
@@ -101,5 +102,19 @@ function deleteComment(postId, commentId) {
   }
 }
 
+function postVoteToAPI(postId, direction) {
+  return async function(dispatch) {
+    await axios.post(`http://localhost:5000/api/posts/${postId}/vote/${direction}`);
+    dispatch(vote(postId, direction));
+  };
+}
 
-export {getTitlesFromAPI, getPostFromAPI, postToAPI, deleteFromAPI, putToAPI, postCommentToAPI, deleteCommentFromAPI};
+function vote(postId, direction) {
+  return {
+    type: VOTE_POST,
+    postId,
+    direction
+  }
+}
+
+export {getTitlesFromAPI, getPostFromAPI, postToAPI, deleteFromAPI, putToAPI, postCommentToAPI, deleteCommentFromAPI, postVoteToAPI};
