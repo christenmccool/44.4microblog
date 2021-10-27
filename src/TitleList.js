@@ -21,6 +21,7 @@ const TitleList = () => {
           id={title.id} 
           title={title.title} 
           description={title.description} 
+          votes={title.votes} 
         />
       )}
     </div>

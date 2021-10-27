@@ -1,4 +1,4 @@
-import {LOAD_TITLES, LOAD_POST, ADD_POST, DELETE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT} from './actionTypes';
+import {LOAD_TITLES, LOAD_POST, ADD_POST, DELETE_POST, EDIT_POST, ADD_COMMENT, DELETE_COMMENT, VOTE_POST} from './actionTypes';
 
 const INITIAL_STATE = {titles: [], posts: {}};
 
@@ -14,7 +14,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
 
     case ADD_POST: {
       return {...state, 
-              titles: [...state.titles, {id: action.id, title: action.post.title, description: action.post.description}],
+              titles: [...state.titles, {id: action.id, title: action.post.title, description: action.post.description, votes: 0}],
               posts: {...state.posts, [action.id]: {...action.post, comments: []} }}
     }
 
@@ -28,7 +28,7 @@ const rootReducer = (state=INITIAL_STATE, action) => {
 
     case EDIT_POST: {
       const updatedPosts = {...state.posts};
-      updatedPosts[action.id] = {...action.post, comments: state.posts[action.id].comments};
+      updatedPosts[action.id] = {...action.post, comments: state.posts[action.id].comments, votes: state.posts[action.id].votes};
       const updatedTitles = state.titles.map(ele => ele.id===action.id ? 
                                                 {id: action.id, title: action.post.title, description: action.post.description} 
                                                 : ele);
@@ -53,6 +53,29 @@ const rootReducer = (state=INITIAL_STATE, action) => {
               }
     }
     
+    case VOTE_POST: {
+      let updatedVotes;
+      
+      if (state.posts[action.postId]) {
+        updatedVotes = action.direction === 'up' ? state.posts[action.postId].votes + 1 
+        : state.posts[action.postId].votes - 1;
+      } else {
+        const title = state.titles.filter(ele => ele.id === action.postId)[0];
+        updatedVotes = action.direction === 'up' ? title.votes + 1
+                                                  : title.votes - 1;
+      }
+
+
+      const updatedPosts = {...state.posts};
+      updatedPosts[action.postId] = {...state.posts[action.postId],
+                                      votes: updatedVotes};
+      
+      const updatedTitles = state.titles.map(ele => ele.id===action.postId ? 
+                  {...ele, votes: updatedVotes}
+                  : ele);
+
+      return {...state, posts: updatedPosts, titles: updatedTitles};
+    }
 
     default: return state;
   }

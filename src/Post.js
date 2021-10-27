@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import { getPostFromAPI, deleteFromAPI, putToAPI } from './actions';
+import { getPostFromAPI, deleteFromAPI, putToAPI, postVoteToAPI } from './actions';
 import PostDetail from './PostDetail';
 import PostForm from './PostForm';
 
@@ -38,6 +38,10 @@ const Post = () => {
     history.push('/');
   }
 
+  const voteOnPost = (direction) => {
+    dispatch(postVoteToAPI(+id, direction));
+  }
+
   if (!post) {
     return (
       <div className="PostDetail">
@@ -53,7 +57,7 @@ const Post = () => {
   }
 
   return (
-    <PostDetail id={id} post={post} removePost={removePost} toggleShowForm={toggleShowForm} />
+    <PostDetail id={id} post={post} removePost={removePost} toggleShowForm={toggleShowForm} voteOnPost={voteOnPost} />
   )
 }
 

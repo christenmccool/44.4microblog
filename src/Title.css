@@ -1,6 +1,12 @@
 .Title {
   border: 1px solid lightgrey;
   width: 45%;
+  margin: 0;
+  padding: 0;
+}
+
+.Title h1 {
+  margin: 5px 0px !important;
 }
 
 .Title a {
@@ -8,3 +14,18 @@
   margin: 0;
 }
 
+.Title-vote-div {
+  background-color: #F5F5F5;
+  margin-top: 20px;
+  padding: 8px 0;
+}
+
+.Title-thumbsup {
+  color: green;
+  margin: 0 5px 0 20px;
+}
+
+.Title-thumbsdown {
+  color: red;
+  margin: 0 5px;
+}
