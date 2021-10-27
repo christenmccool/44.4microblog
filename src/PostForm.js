@@ -2,7 +2,8 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import './PostForm.css'
 
-const PostForm = ({postData, addPost, editPost, toggleShowForm}) => {
+const PostForm = ({addNewPost, postData, editPostContent, toggleShowForm}) => {
+
   const INITIAL_FORM = {
     title: "",
     description: "",
@@ -20,9 +21,9 @@ const PostForm = ({postData, addPost, editPost, toggleShowForm}) => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
     if (postData) {
-      editPost(postData.id, formData);
+      editPostContent(formData);
     } else {
-      addPost(formData);
+      addNewPost(formData);
     }
     setFormData(INITIAL_FORM);
   }

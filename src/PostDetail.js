@@ -1,44 +1,14 @@
-import React, { useState, useContext } from 'react';
-import PostContext from './PostContext';
-import { useParams } from 'react-router-dom';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenSquare, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import PostForm from './PostForm';
+import CommentList from './CommentList';
 import './PostDetail.css';
 
 
-const PostDetail = ({editPost, removePost}) => {
-  const [showForm, setShowForm] = useState(false);
-
-  const posts = useContext(PostContext);
-  const {id} = useParams();
-
-  console.log(posts);
-  console.log(id);
-
-
-  const post = posts.find(post => post.id === id);
-
-  const toggleShowForm = () => {
-    setShowForm(!showForm);
-  }
-
+const PostDetail = ({id, post, removePost, toggleShowForm}) => {
+ 
   const handleTrashClick = () => {
-    removePost(id);
-  }
-
-  if (!post) {
-    return (
-      <div className="PostDetail">
-        <h1>{`Post ${id} does not exist`}</h1>
-      </div>
-    )
-  }
-
-  if (showForm) {
-    return (
-      <PostForm postData={post} editPost={editPost} toggleShowForm={toggleShowForm}/>
-    )
+    removePost(post.id);
   }
 
   return (
@@ -52,6 +22,7 @@ const PostDetail = ({editPost, removePost}) => {
       </div>
       <h2>{post.description}</h2>
       <p>{post.body}</p>
+      <CommentList postId={id} comments={post.comments} />
     </div>
   )
 }

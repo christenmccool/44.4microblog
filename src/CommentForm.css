@@ -1,0 +1,45 @@
+.CommentForm {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  text-align: left;
+}
+
+.CommentForm label {
+  display: block;
+  font-size: 20px;
+  margin: 20px 0 5px 0;
+}
+
+.CommentForm input, .PostForm textarea{
+  display: block;
+  box-sizing: border-box;
+  border-radius: 3px;
+  padding: 5px;
+  font-size: 20px;
+  width: 100%;
+}
+
+.CommentForm-btn-div {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.CommentForm button {
+  padding: 7px 10px 5px 10px;
+  font-size: 20px;
+  border-radius: 3px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#CommentForm-submit-btn {
+  background-color: blue;
+}
+
+#CommentForm-cancel-btn {
+  background-color: darkgrey;
+}
