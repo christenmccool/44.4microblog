@@ -1,20 +1,26 @@
-import React, {useContext} from 'react';
+import React, {useEffect} from 'react';
 import Title from './Title.js';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {getTitlesFromAPI} from './actions';
 import './TitleList.css';
 
 
 const TitleList = () => {
-  const posts = useSelector(state => state.posts);
+  const titles = useSelector(state => state.titles);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getTitlesFromAPI());
+  }, [dispatch]);
   
   return (
     <div className="TitleList">
-      {Object.keys(posts).map(key => 
+       {titles.map(title => 
         <Title 
-          key={key} 
-          id={key} 
-          title={posts[key].title} 
-          description={posts[key].description} 
+          key={title.id} 
+          id={title.id} 
+          title={title.title} 
+          description={title.description} 
         />
       )}
     </div>

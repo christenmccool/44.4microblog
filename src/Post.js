@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-import { deletePost, editPost } from './actions';
+import { getPostFromAPI, deleteFromAPI, putToAPI } from './actions';
 import PostDetail from './PostDetail';
 import PostForm from './PostForm';
 
@@ -14,24 +14,27 @@ const Post = () => {
   const posts = useSelector(state => state.posts);
   const {id} = useParams();
 
-  const post = posts[id];
   const dispatch = useDispatch();
+
+  let post = posts[id]; 
+  
+  useEffect(() => {
+    if (post) return;
+    dispatch(getPostFromAPI(id));
+    post = posts[id]; 
+  }, [dispatch]);
 
   const toggleShowForm = () => {
     setShowForm(!showForm);
   }
   
   const editPostContent = (edPost) => {
-    dispatch(editPost(id, edPost));
-    localStorage.setItem("microblog-posts", JSON.stringify({...posts, [id]: edPost}));
+    dispatch(putToAPI(id, edPost));
     setShowForm(false);
   }
 
   const removePost = () => {
-    const remainingPosts = {...posts};
-    delete remainingPosts[id];
-    dispatch(deletePost(id));
-    localStorage.setItem("microblog-posts", JSON.stringify(remainingPosts));
+    dispatch(deleteFromAPI(id));
     history.push('/');
   }
 

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './CommentForm.css'
 
-const CommentForm = ({postId, addNewComment}) => {
+const CommentForm = ({addNewComment}) => {
 
   const [comment, setComment] = useState("");
 

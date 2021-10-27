@@ -5,7 +5,7 @@ import './Title.css';
 const Title = ({id, title, description}) => {
   return (
     <div className="Title">
-      <Link exact to={`/posts/${id}`}><h1>{title}</h1></Link>
+      <Link to={`/posts/${id}`}><h1>{title}</h1></Link>
       <p>{description}</p>
     </div>
   )
